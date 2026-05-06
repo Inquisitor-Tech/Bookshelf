@@ -25,6 +25,12 @@ model Book {
   status    String   // "reading", "finished", "wishlist"
   rating    Int?     // 1-5, only for finished books
   notes     String?
+  coverUrl  String?  // URL to book cover image
+  isbn      String?  // ISBN for lookup
+  startDate DateTime? // When user started reading
+  finishDate DateTime? // When user finished reading
+  pages     Int?     // Total pages in book
+  currentPage Int?   // Current page for reading books
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

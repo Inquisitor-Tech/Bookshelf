@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { Navbar } from "@/components/Navbar";
 import { BookCard } from "@/components/BookCard";
 import { AddBookForm } from "@/components/AddBookForm";
+import { SkeletonCard } from "@/components/SkeletonCard";
 
 type Book = {
   id: string;
@@ -17,6 +18,11 @@ type Book = {
   status: string;
   rating: number | null;
   notes: string | null;
+  coverUrl?: string | null;
+  startDate?: string | null;
+  finishDate?: string | null;
+  pages?: number | null;
+  currentPage?: number | null;
 };
 
 const FILTERS = [
@@ -110,7 +116,12 @@ export default function Home() {
         </div>
 
         {loading ? (
-          <p className="text-center text-ink/60 py-12">Loading...</p>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <AddBookForm onAdd={handleAdd} />
+            {[...Array(6)].map((_, i) => (
+              <SkeletonCard key={i} />
+            ))}
+          </div>
         ) : (
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <AddBookForm onAdd={handleAdd} />

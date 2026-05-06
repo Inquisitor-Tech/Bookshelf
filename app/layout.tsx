@@ -1,12 +1,12 @@
 // app/layout.tsx
-// Root layout - wraps every page
+// Root layout - wraps all pages with providers and basic HTML structure
 
-import "./globals.css";
 import { Providers } from "@/components/Providers";
+import "./globals.css";
 
 export const metadata = {
-  title: "BookShelf — Personal Reading Tracker",
-  description: "Track your books, log progress, and see your reading habits.",
+  title: "BookShelf",
+  description: "A personal reading tracker",
 };
 
 export default function RootLayout({
@@ -15,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-cream text-ink dark:bg-dark-bg dark:text-dark-text transition-colors duration-300">
         <Providers>{children}</Providers>
       </body>
     </html>
