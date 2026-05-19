@@ -36,11 +36,11 @@ export async function searchBooks(query: string): Promise<OpenLibraryBook[]> {
 }
 
 export function getCoverUrl(coverId: number, size: 'S' | 'M' | 'L' = 'M'): string {
-  return `${OPEN_LIBRARY_BASE}/covers/id/${coverId}-${size}.jpg`;
+  return `https://covers.openlibrary.org/b/id/${coverId}-${size}.jpg`;
 }
 
 export function getIsbnCoverUrl(isbn: string, size: 'S' | 'M' | 'L' = 'M'): string {
-  return `${OPEN_LIBRARY_BASE}/covers/isbn/${isbn}-${size}.jpg`;
+  return `https://covers.openlibrary.org/b/isbn/${isbn}-${size}.jpg`;
 }
 
 export async function getBookByIsbn(isbn: string): Promise<OpenLibraryBook | null> {
