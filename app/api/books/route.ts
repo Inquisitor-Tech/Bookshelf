@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
   const userId = await getUserId();
   if (!userId) return NextResponse.json({ error: "Unauthorised" }, { status: 401 });
 
-  const { title, author, status, rating, notes } = await req.json();
+  const { title, author, status, rating, notes, coverUrl, isbn, startDate, finishDate, pages, currentPage } = await req.json();
 
   if (!title || !author || !status) {
     return NextResponse.json(
@@ -45,6 +45,12 @@ export async function POST(req: NextRequest) {
       status,
       rating: rating ? Number(rating) : null,
       notes: notes || null,
+      coverUrl: coverUrl || null,
+      isbn: isbn || null,
+      startDate: startDate ? new Date(startDate) : null,
+      finishDate: finishDate ? new Date(finishDate) : null,
+      pages: pages ? Number(pages) : null,
+      currentPage: currentPage ? Number(currentPage) : null,
       userId,
     },
   });
