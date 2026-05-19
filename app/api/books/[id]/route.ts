@@ -8,6 +8,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 async function getUserId() {
   const session = await getServerSession(authOptions);
   return (session?.user as any)?.id as string | undefined;
