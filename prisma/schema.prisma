@@ -1,0 +1,42 @@
+// Prisma schema - defines our database models
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  books     Book[]
+}
+
+model Book {
+  id        String   @id @default(cuid())
+  title     String
+  author    String
+  status    String   // "reading", "finished", "wishlist"
+  rating    Int?     // 1-5, only for finished books
+  notes     String?
+  coverUrl  String?  // URL to book cover image
+  isbn      String?  // ISBN for lookup
+  startDate DateTime? // When user started reading
+  finishDate DateTime? // When user finished reading
+  pages     Int?     // Total pages in book
+  currentPage Int?   // Current page for reading books
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
